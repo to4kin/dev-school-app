@@ -1,0 +1,10 @@
+{
+  "apiPackage": "dkrylov.petprojects.devschool.api",
+  "modelPackage": "dkrylov.petprojects.devschool.model",
+  "invokerPackage": "dkrylov.petprojects.devschool.invoker",
+  "dateLibrary": "java8",
+  "delegatePattern": "true",
+  "serializableModel": "true",
+  "generateApiTests": "false",
+  "generateModelTests": "false"
+}
