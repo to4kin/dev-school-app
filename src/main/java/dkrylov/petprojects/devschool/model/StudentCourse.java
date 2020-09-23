@@ -15,14 +15,15 @@ import javax.persistence.*;
 @Table(name = "student_course")
 @IdClass(CompositePrimaryKey.class)
 public class StudentCourse {
+
     @Id
     @ManyToOne(optional = false, targetEntity = Student.class)
-    @JoinColumn(name = "student_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "student_id", referencedColumnName = "id")
     private Student student;
 
     @Id
     @ManyToOne(optional = false, targetEntity = Course.class)
-    @JoinColumn(name = "course_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "course_id", referencedColumnName = "id")
     private Course course;
 
     @Column(name = "mark")

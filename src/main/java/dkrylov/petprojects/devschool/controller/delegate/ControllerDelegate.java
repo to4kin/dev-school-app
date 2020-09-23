@@ -1,12 +1,11 @@
 package dkrylov.petprojects.devschool.controller.delegate;
 
-import dkrylov.petprojects.devschool.model.MentorDto;
-import dkrylov.petprojects.devschool.model.SchoolDto;
+import dkrylov.petprojects.devschool.model.*;
 import dkrylov.petprojects.devschool.service.CourseService;
 import dkrylov.petprojects.devschool.api.ApiApiDelegate;
-import dkrylov.petprojects.devschool.model.CourseDto;
 import dkrylov.petprojects.devschool.service.MentorService;
 import dkrylov.petprojects.devschool.service.SchoolService;
+import dkrylov.petprojects.devschool.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +20,7 @@ public class ControllerDelegate implements ApiApiDelegate {
     private final CourseService courseService;
     private final MentorService mentorService;
     private final SchoolService schoolService;
+    private final StudentService studentService;
 
     /**
      * {@inheritDoc}
@@ -92,5 +92,29 @@ public class ControllerDelegate implements ApiApiDelegate {
     @Override
     public ResponseEntity<SchoolDto> getSchool(Long id) {
         return new ResponseEntity<SchoolDto>(schoolService.findById(id), HttpStatus.OK);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ResponseEntity<StudentDto> createStudent(StudentDto studentDto) {
+        return new ResponseEntity<StudentDto>(studentService.create(studentDto), HttpStatus.OK);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ResponseEntity<StudentDto> getStudent(Long id) {
+        return new ResponseEntity<StudentDto>(studentService.findById(id), HttpStatus.OK);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ResponseEntity<List<StudentDto>> getStudentsByCriteria(SearchStudentsDto body) {
+        return new ResponseEntity<List<StudentDto>>(studentService.getStudentsByCriteria(body), HttpStatus.OK);
     }
 }

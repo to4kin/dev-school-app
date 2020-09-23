@@ -277,7 +277,7 @@ paths:
         200:
           description: "Successfully found"
           schema:
-            $ref: "#/definitions/MentorDto"
+            $ref: "#/definitions/StudentDto"
         400:
           description: "Can't perform operation"
         404:

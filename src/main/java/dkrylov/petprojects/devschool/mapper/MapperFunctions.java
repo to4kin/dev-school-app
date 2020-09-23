@@ -8,7 +8,9 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Mapper functions utils.
@@ -63,7 +65,7 @@ public class MapperFunctions {
     }
 
     /**
-     * Mapper for transforming Mentor DTO to entity
+     * Mapper for transforming School DTO to entity
      *
      * @return function for mapping
      */
@@ -72,12 +74,51 @@ public class MapperFunctions {
     }
 
     /**
-     * Mapper for transforming Mentor entity to DTO
+     * Mapper for transforming School entity to DTO
      *
      * @return function for mapping
      */
     public static Function<School, SchoolDto> schoolToDtoMapper() {
         return school -> modelMapper.map(school, SchoolDto.class);
+    }
+
+    /**
+     * Mapper for transforming Student DTO to entity
+     *
+     * @return function for mapping
+     */
+    public static Function<StudentDto, Student> dtoToStudentMapper() {
+        return studentDto -> {
+            Student student = modelMapper.map(studentDto, Student.class);
+            student.setSchool(Optional.ofNullable(studentDto.getSchool()).map(dtoToSchoolMapper()).orElse(null));
+            student.setMentor(Optional.ofNullable(studentDto.getMentor()).map(dtoToMentorMapper()).orElse(null));
+            student.setCourses(studentDto.getCourses().stream().map(studentCourseDto -> {
+                StudentCourse studentCourse = modelMapper.map(studentCourseDto, StudentCourse.class);
+                studentCourse.setCourse(dtoToCourseMapper().apply(studentCourseDto.getCourse()));
+                studentCourse.setStudent(student);
+                return studentCourse;
+            }).collect(Collectors.toSet()));
+            return student;
+        };
+    }
+
+    /**
+     * Mapper for transforming Student entity to DTO
+     *
+     * @return function for mapping
+     */
+    public static Function<Student, StudentDto> studentToDtoMapper() {
+        return student -> {
+            StudentDto studentDto = modelMapper.map(student, StudentDto.class);
+            studentDto.setSchool(Optional.ofNullable(student.getSchool()).map(schoolToDtoMapper()).orElse(null));
+            studentDto.setMentor(Optional.ofNullable(student.getMentor()).map(mentorToDtoMapper()).orElse(null));
+            studentDto.setCourses(student.getCourses().stream().map(course -> {
+                StudentCourseDto studentCourseDto = modelMapper.map(course, StudentCourseDto.class);
+                studentCourseDto.setCourse(courseToDtoMapper().apply(course.getCourse()));
+                return studentCourseDto;
+            }).collect(Collectors.toList()));
+            return studentDto;
+        };
     }
 
 }

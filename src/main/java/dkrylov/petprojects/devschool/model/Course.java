@@ -1,12 +1,9 @@
 package dkrylov.petprojects.devschool.model;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 
 @Data
 @Entity

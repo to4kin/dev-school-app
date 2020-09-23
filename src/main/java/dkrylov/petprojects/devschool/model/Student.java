@@ -10,7 +10,7 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "mentor")
+@Table(name = "student")
 @ToString
 @EqualsAndHashCode(callSuper = true)
 @SequenceGenerator(name = BaseEntity.PK_GENERATOR_NAME, sequenceName = "student_seq", allocationSize = 1)
@@ -31,14 +31,14 @@ public class Student extends BaseEntity {
     @NotNull
     private String phone;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinColumn(name = "mentor_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "mentor_id", referencedColumnName = "id")
     private Mentor mentor;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinColumn(name = "school_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "school_id", referencedColumnName = "id")
     private School school;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "student")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "student")
     private Set<StudentCourse> courses;
 }
