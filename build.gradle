@@ -3,7 +3,7 @@ plugins {
     id "org.hidetake.swagger.generator" version "2.18.2"
 }
 
-group 'dkrylov.petprojects'
+group 'ru.tsystems'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
