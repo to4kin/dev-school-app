@@ -409,12 +409,12 @@ definitions:
       courses:
         type: "array"
         items:
-          $ref: "#/definitions/StudentCourseDto"
+          $ref: "#/definitions/CourseRegistrationDto"
       version:
         type: "integer"
         format: "int64"
         description: "Version of object"
-  StudentCourseDto:
+  CourseRegistrationDto:
     type: "object"
     properties:
       course:

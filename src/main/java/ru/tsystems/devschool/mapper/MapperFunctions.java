@@ -1,6 +1,5 @@
 package ru.tsystems.devschool.mapper;
 
-import ru.tsystems.devschool.model.*;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -8,10 +7,14 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Component;
 import ru.tsystems.devschool.model.Course;
+import ru.tsystems.devschool.model.CourseDto;
+import ru.tsystems.devschool.model.CourseRegistrationDto;
 import ru.tsystems.devschool.model.Mentor;
+import ru.tsystems.devschool.model.MentorDto;
 import ru.tsystems.devschool.model.School;
+import ru.tsystems.devschool.model.SchoolDto;
 import ru.tsystems.devschool.model.Student;
-import ru.tsystems.devschool.model.StudentCourse;
+import ru.tsystems.devschool.model.StudentDto;
 
 import java.util.Optional;
 import java.util.function.Function;
@@ -97,12 +100,7 @@ public class MapperFunctions {
             Student student = modelMapper.map(studentDto, Student.class);
             student.setSchool(Optional.ofNullable(studentDto.getSchool()).map(dtoToSchoolMapper()).orElse(null));
             student.setMentor(Optional.ofNullable(studentDto.getMentor()).map(dtoToMentorMapper()).orElse(null));
-            student.setCourses(studentDto.getCourses().stream().map(studentCourseDto -> {
-                StudentCourse studentCourse = modelMapper.map(studentCourseDto, StudentCourse.class);
-                studentCourse.setCourse(dtoToCourseMapper().apply(studentCourseDto.getCourse()));
-                studentCourse.setStudent(student);
-                return studentCourse;
-            }).collect(Collectors.toSet()));
+            studentDto.getCourses().forEach(c -> student.addCourse(modelMapper.map(c.getCourse(), Course.class)));
             return student;
         };
     }
@@ -117,10 +115,11 @@ public class MapperFunctions {
             StudentDto studentDto = modelMapper.map(student, StudentDto.class);
             studentDto.setSchool(Optional.ofNullable(student.getSchool()).map(schoolToDtoMapper()).orElse(null));
             studentDto.setMentor(Optional.ofNullable(student.getMentor()).map(mentorToDtoMapper()).orElse(null));
-            studentDto.setCourses(student.getCourses().stream().map(course -> {
-                StudentCourseDto studentCourseDto = modelMapper.map(course, StudentCourseDto.class);
-                studentCourseDto.setCourse(courseToDtoMapper().apply(course.getCourse()));
-                return studentCourseDto;
+            studentDto.setCourses(student.getRegistrations().stream().map(registration -> {
+                CourseRegistrationDto courseRegistrationDto = new CourseRegistrationDto();
+                courseRegistrationDto.setCourse(modelMapper.map(registration.getCourse(), CourseDto.class));
+                courseRegistrationDto.setMark(registration.getMark());
+                return courseRegistrationDto;
             }).collect(Collectors.toList()));
             return studentDto;
         };

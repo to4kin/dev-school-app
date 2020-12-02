@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id "org.hidetake.swagger.generator" version "2.18.2"
+    id 'org.springframework.boot' version "2.3.3.RELEASE"
 }
 
 group 'ru.tsystems'
@@ -23,6 +24,14 @@ def h2Version = "1.4.200"
 repositories {
     mavenCentral()
     jcenter()
+}
+
+springBoot {
+    mainClassName = 'ru.tsystems.devschool.DevSchoolApplication'
+}
+
+bootRun{
+    jvmArgs "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8787"
 }
 
 dependencies {
