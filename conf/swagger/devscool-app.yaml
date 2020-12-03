@@ -34,9 +34,13 @@ paths:
           schema:
             $ref: "#/definitions/CourseDto"
         400:
-          description: "Can't perform operation"
+          description: "Bad request"
+          schema:
+            $ref: '#/definitions/ErrorDto'
         500:
-          description: "Internal error"
+          description: "Internal server error"
+          schema:
+            $ref: '#/definitions/ErrorDto'
   /api/course/{id}:
     get:
       tags:
@@ -58,11 +62,17 @@ paths:
           schema:
             $ref: "#/definitions/CourseDto"
         400:
-          description: "Can't perform operation"
+          description: "Bad request"
+          schema:
+            $ref: '#/definitions/ErrorDto'
         404:
           description: "Not found"
+          schema:
+            $ref: '#/definitions/ErrorDto'
         500:
-          description: "Internal error"
+          description: "Internal server error"
+          schema:
+            $ref: '#/definitions/ErrorDto'
   /api/course/search:
     get:
       tags:
@@ -80,9 +90,13 @@ paths:
             items:
               $ref: "#/definitions/CourseDto"
         400:
-          description: "Can't perform operation"
+          description: "Bad request"
+          schema:
+            $ref: '#/definitions/ErrorDto'
         500:
-          description: "Internal error"
+          description: "Internal server error"
+          schema:
+            $ref: '#/definitions/ErrorDto'
   /api/school:
     post:
       tags:
@@ -107,9 +121,13 @@ paths:
           schema:
             $ref: "#/definitions/SchoolDto"
         400:
-          description: "Can't perform operation"
+          description: "Bad request"
+          schema:
+            $ref: '#/definitions/ErrorDto'
         500:
-          description: "Internal error"
+          description: "Internal server error"
+          schema:
+            $ref: '#/definitions/ErrorDto'
   /api/school/{id}:
     get:
       tags:
@@ -131,11 +149,17 @@ paths:
           schema:
             $ref: "#/definitions/SchoolDto"
         400:
-          description: "Can't perform operation"
+          description: "Bad request"
+          schema:
+            $ref: '#/definitions/ErrorDto'
         404:
           description: "Not found"
+          schema:
+            $ref: '#/definitions/ErrorDto'
         500:
-          description: "Internal error"
+          description: "Internal server error"
+          schema:
+            $ref: '#/definitions/ErrorDto'
   /api/school/search:
     get:
       tags:
@@ -153,9 +177,13 @@ paths:
             items:
               $ref: "#/definitions/SchoolDto"
         400:
-          description: "Can't perform operation"
+          description: "Bad request"
+          schema:
+            $ref: '#/definitions/ErrorDto'
         500:
-          description: "Internal error"
+          description: "Internal server error"
+          schema:
+            $ref: '#/definitions/ErrorDto'
   /api/mentor:
     post:
       tags:
@@ -180,9 +208,13 @@ paths:
           schema:
             $ref: "#/definitions/MentorDto"
         400:
-          description: "Can't perform operation"
+          description: "Bad request"
+          schema:
+            $ref: '#/definitions/ErrorDto'
         500:
-          description: "Internal error"
+          description: "Internal server error"
+          schema:
+            $ref: '#/definitions/ErrorDto'
   /api/mentor/{id}:
     get:
       tags:
@@ -204,11 +236,17 @@ paths:
           schema:
             $ref: "#/definitions/MentorDto"
         400:
-          description: "Can't perform operation"
+          description: "Bad request"
+          schema:
+            $ref: '#/definitions/ErrorDto'
         404:
           description: "Not found"
+          schema:
+            $ref: '#/definitions/ErrorDto'
         500:
-          description: "Internal error"
+          description: "Internal server error"
+          schema:
+            $ref: '#/definitions/ErrorDto'
   /api/mentor/search:
     get:
       tags:
@@ -228,9 +266,13 @@ paths:
             items:
               $ref: "#/definitions/MentorDto"
         400:
-          description: "Can't perform operation"
+          description: "Bad request"
+          schema:
+            $ref: '#/definitions/ErrorDto'
         500:
-          description: "Internal error"
+          description: "Internal server error"
+          schema:
+            $ref: '#/definitions/ErrorDto'
   /api/student:
     post:
       tags:
@@ -255,9 +297,17 @@ paths:
           schema:
             $ref: "#/definitions/StudentDto"
         400:
-          description: "Can't perform operation"
+          description: "Bad request"
+          schema:
+            $ref: '#/definitions/ErrorDto'
+        409:
+          description: "Conflict"
+          schema:
+            $ref: '#/definitions/ErrorDto'
         500:
-          description: "Internal error"
+          description: "Internal server error"
+          schema:
+            $ref: '#/definitions/ErrorDto'
   /api/student/{id}:
     get:
       tags:
@@ -279,11 +329,17 @@ paths:
           schema:
             $ref: "#/definitions/StudentDto"
         400:
-          description: "Can't perform operation"
+          description: "Bad request"
+          schema:
+            $ref: '#/definitions/ErrorDto'
         404:
           description: "Not found"
+          schema:
+            $ref: '#/definitions/ErrorDto'
         500:
-          description: "Internal error"
+          description: "Internal server error"
+          schema:
+            $ref: '#/definitions/ErrorDto'
   /api/student/search:
     post:
       tags:
@@ -310,9 +366,13 @@ paths:
             items:
               $ref: "#/definitions/StudentDto"
         400:
-          description: "Can't perform operation"
+          description: "Bad request"
+          schema:
+            $ref: '#/definitions/ErrorDto'
         500:
-          description: "Internal error"
+          description: "Internal server error"
+          schema:
+            $ref: '#/definitions/ErrorDto'
 definitions:
   CourseDto:
     type: "object"
@@ -435,3 +495,24 @@ definitions:
         type: "integer"
         format: "int32"
         description: "Number of school"
+  ErrorDto:
+    required:
+      - error
+    properties:
+      error:
+        type: string
+        enum:
+          - CONFLICT
+          - BAD_REQUEST
+          - NOT_FOUND
+          - INTERNAL_SERVER_ERROR
+        description: |
+          Error codes:
+          * CONFLICT - Attempt to save not unique data.
+          * NOT_FOUND - Data was not found.
+          * BAD_REQUEST - incorrect value in request params.
+          * INTERNAL_SERVER_ERROR - problem on server side.
+      error_description:
+        description: Description of error.
+        type: string
+
