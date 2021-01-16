@@ -1,5 +1,6 @@
 package ru.tsystems.devschool.controller.delegate;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.core.NestedExceptionUtils;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.support.MissingServletRequestPartExcept
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import ru.tsystems.devschool.model.ErrorDto;
 
+@Slf4j
 @ControllerAdvice
 public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
@@ -31,6 +33,7 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = {Exception.class})
     public ResponseEntity<Object> handleException(Exception e) {
+        log.error("Internal server error!", e);
         ErrorDto error = new ErrorDto();
         error.setError(ErrorDto.ErrorEnum.INTERNAL_SERVER_ERROR);
         error.setErrorDescription(NestedExceptionUtils.getMostSpecificCause(e).getMessage());

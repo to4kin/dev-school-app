@@ -27,7 +27,7 @@ public class CourseRegistration {
     @EmbeddedId
     CourseRegistrationKey courseRegistrationKey = new CourseRegistrationKey();
 
-    private int mark;
+    private Integer mark;
 
     public CourseRegistration(Course course, Student student, int mark) {
         this.setCourse(course);

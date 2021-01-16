@@ -40,7 +40,7 @@ public class StudentService {
      *
      * @return List of courses
      */
-    @Transactional
+    @Transactional(readOnly = true)
     public List<StudentDto> getStudentsByCriteria(SearchStudentsDto searchStudentsDto) {
         return studentRepository.findAll().stream().map(MapperFunctions.studentToDtoMapper()).collect(Collectors.toList());
     }

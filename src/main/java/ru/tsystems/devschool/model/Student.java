@@ -55,7 +55,7 @@ public class Student extends BaseEntity {
     @OneToMany(mappedBy = "courseRegistrationKey.student", cascade = CascadeType.ALL, orphanRemoval = true)
     Set<CourseRegistration> registrations = new HashSet<>();
 
-    public boolean addCourse(Course course) {
-        return registrations.add(new CourseRegistration(course, this, 0));
+    public boolean addCourse(Course course, Integer mark) {
+        return registrations.add(new CourseRegistration(course, this, mark));
     }
 }

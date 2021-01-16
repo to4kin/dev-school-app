@@ -100,7 +100,7 @@ public class MapperFunctions {
             Student student = modelMapper.map(studentDto, Student.class);
             student.setSchool(Optional.ofNullable(studentDto.getSchool()).map(dtoToSchoolMapper()).orElse(null));
             student.setMentor(Optional.ofNullable(studentDto.getMentor()).map(dtoToMentorMapper()).orElse(null));
-            studentDto.getCourses().forEach(c -> student.addCourse(modelMapper.map(c.getCourse(), Course.class)));
+            studentDto.getCourses().forEach(c -> student.addCourse(modelMapper.map(c.getCourse(), Course.class), c.getMark()));
             return student;
         };
     }
