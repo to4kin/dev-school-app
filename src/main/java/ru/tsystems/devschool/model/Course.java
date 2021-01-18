@@ -6,7 +6,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -31,6 +30,6 @@ public class Course extends BaseEntity {
     @NotNull
     private String name;
 
-    @OneToMany(mappedBy = "courseRegistrationKey.course", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "courseRegistrationKey.course")
     Set<CourseRegistration> registrations = new HashSet<>();
 }

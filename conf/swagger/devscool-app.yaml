@@ -254,8 +254,6 @@ paths:
       operationId: "getAllMentors"
       summary: "Gets list of Mentors"
       description: "API for getting all Mentors"
-      consumes:
-        - "application/json"
       produces:
         - "application/json"
       responses:
