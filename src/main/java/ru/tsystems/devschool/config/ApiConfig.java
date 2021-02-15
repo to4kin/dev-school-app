@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
  */
 @Configuration
 @RequiredArgsConstructor
-@PropertySource("classpath:application.properties")
+@PropertySource("classpath:application.yaml")
 public class ApiConfig {
 
     @Value("${base.path}")
