@@ -13,11 +13,13 @@ import java.net.UnknownHostException;
 public class HeaderFilter extends OncePerRequestFilter {
 
     private String hostAddress;
+    private String hostName;
     public HeaderFilter(String port) {
         InetAddress ip;
         try {
             ip = InetAddress.getLocalHost();
             hostAddress = ip.getHostAddress() + ":" + port;
+            hostName = ip.getHostName() + ":" + port;
         } catch (UnknownHostException e) {
             hostAddress = null;
             e.printStackTrace();
@@ -27,7 +29,7 @@ public class HeaderFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
         FilterChain filterChain) throws ServletException, IOException {
-        response.addHeader("Full-Path", hostAddress);
+        response.addHeader("Full-Path", hostName);
         filterChain.doFilter(request, response);
     }
 }
