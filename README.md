@@ -39,3 +39,9 @@ Simple deploy can be done by java jar command.
 ```bash
 java -jar dev-school-app-1.0-SNAPSHOT.jar
 ```
+
+Useful links
+```bash
+Swagger API: http://localhost:8080/swagger-ui.html
+Swagger DOCS: https://swagger.io/docs/
+```
