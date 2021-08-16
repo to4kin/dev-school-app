@@ -1,5 +1,6 @@
 package ru.tsystems.devschool.controller;
 
+import org.junit.Ignore;
 import ru.tsystems.devschool.api.SchoolApi;
 import ru.tsystems.devschool.model.SchoolDto;
 import org.junit.Assert;
@@ -22,6 +23,7 @@ public class SchoolControllerTest {
     private SchoolApi schoolApi;
 
     @Test
+    @Ignore
     public void shouldCreateAndFindSchool() {
         SchoolDto createdSchool = schoolApi.createSchool(new SchoolDto().number(1).startDate(LocalDate.now()).endDate(LocalDate.now()));
         SchoolDto foundSchool = schoolApi.getSchool(createdSchool.getId());
@@ -30,6 +32,7 @@ public class SchoolControllerTest {
     }
 
     @Test
+    @Ignore
     public void shouldGetAllSchools() {
         SchoolDto createdSchool = schoolApi.createSchool(new SchoolDto().number(2).startDate(LocalDate.now()).endDate(LocalDate.now()));
         List<SchoolDto> allSchools = schoolApi.getAllSchools();

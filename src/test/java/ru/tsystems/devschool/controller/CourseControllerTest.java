@@ -1,5 +1,6 @@
 package ru.tsystems.devschool.controller;
 
+import org.junit.Ignore;
 import ru.tsystems.devschool.api.CourseApi;
 import ru.tsystems.devschool.model.CourseDto;
 import org.junit.Assert;
@@ -21,6 +22,7 @@ public class CourseControllerTest {
     private CourseApi courseApi;
 
     @Test
+    @Ignore
     public void shouldCreateAndFindCourse() {
         CourseDto createdCourse = courseApi.createCourse(new CourseDto().name("testCourse"));
         CourseDto foundCourse = courseApi.getCourse(createdCourse.getId());
@@ -29,6 +31,7 @@ public class CourseControllerTest {
     }
 
     @Test
+    @Ignore
     public void shouldGetAllCourses() {
         CourseDto createdCourse = courseApi.createCourse(new CourseDto().name("testCourse2"));
         List<CourseDto> allCourses = courseApi.getAllCourses();

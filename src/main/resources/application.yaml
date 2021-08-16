@@ -9,10 +9,10 @@ spring:
   application:
     name: DevSchool-Application-2
   datasource:
-    url: jdbc:postgresql://localhost:5432/dev-school
+    url: ${DATASOURCE_URL:jdbc:postgresql://localhost/dev-school}
     driverClassName: org.postgresql.Driver
-    username: postgres
-    password: 4444
+    username: ${DATASOURCE_USERNAME:postgres}
+    password: ${DATASOURCE_PASSWORD:example}
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     properties:
@@ -25,4 +25,4 @@ spring:
 
 
 base:
-  path: http://localhost:8080
+  path: ${BASE_PATH:http://localhost:8080}

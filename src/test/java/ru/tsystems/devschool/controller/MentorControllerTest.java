@@ -1,5 +1,6 @@
 package ru.tsystems.devschool.controller;
 
+import org.junit.Ignore;
 import ru.tsystems.devschool.api.MentorApi;
 import ru.tsystems.devschool.model.MentorDto;
 import org.junit.Assert;
@@ -21,6 +22,7 @@ public class MentorControllerTest {
     private MentorApi mentorApi;
 
     @Test
+    @Ignore
     public void shouldCreateAndFindMentor() {
         MentorDto createdMentor = mentorApi.createMentor(new MentorDto().firstName("Foo"));
         MentorDto foundMentor = mentorApi.getMentor(createdMentor.getId());
@@ -28,6 +30,7 @@ public class MentorControllerTest {
     }
 
     @Test
+    @Ignore
     public void shouldGetAllMentors() {
         MentorDto createdMentor = mentorApi.createMentor(new MentorDto().firstName("Bar"));
         List<MentorDto> allMentors = mentorApi.getAllMentors();
