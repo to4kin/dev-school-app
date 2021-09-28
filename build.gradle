@@ -1,11 +1,13 @@
 plugins {
+    id 'com.google.cloud.tools.jib' version '3.1.4'
+	id "nebula.release" version "15.3.1"
+
     id 'java'
     id "org.hidetake.swagger.generator" version "2.18.2"
     id 'org.springframework.boot' version "2.3.3.RELEASE"
 }
 
 group 'ru.tsystems'
-version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
 
@@ -32,6 +34,29 @@ springBoot {
 
 bootRun{
     jvmArgs "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8787"
+}
+
+jib {
+	from {
+		image = 'openjdk:8-jre'
+	}
+
+	to {
+		image = dockerRegistry + '/dev-school-app'
+		tags = ['latest', version.toString().replaceFirst('^v', '')]
+		auth {
+			username = dockerUsername
+			password = dockerPassword
+		}
+	}
+
+	container {
+		appRoot = '/app'
+		ports = ['8080']
+		workingDirectory = '/app'
+        mainClass = 'ru.tsystems.devschool.DevSchoolApplication'
+	}
+	allowInsecureRegistries = false
 }
 
 dependencies {
