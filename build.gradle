@@ -3,6 +3,7 @@ plugins {
 	id "nebula.release" version "15.3.1"
 
     id 'java'
+    id 'jacoco'
     id "org.hidetake.swagger.generator" version "2.18.2"
     id 'org.springframework.boot' version "2.3.3.RELEASE"
 }
@@ -57,6 +58,15 @@ jib {
         mainClass = 'ru.tsystems.devschool.DevSchoolApplication'
 	}
 	allowInsecureRegistries = false
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        xml.destination file("${buildDir}/reports/jacoco/report.xml")
+        html.enabled false
+        csv.enabled false
+    }
 }
 
 dependencies {

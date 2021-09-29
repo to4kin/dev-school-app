@@ -1,5 +1,6 @@
 [![ci-build](https://github.com/to4kin/dev-school-app/actions/workflows/ci-build.yml/badge.svg?branch=master)](https://github.com/to4kin/dev-school-app/actions/workflows/ci-build.yml)
 [![GitHub release](https://img.shields.io/github/release/to4kin/dev-school-app.svg)](https://GitHub.com/to4kin/dev-school-app/releases/)
+[![codecov](https://codecov.io/gh/to4kin/dev-school-app/branch/master/graph/badge.svg?token=HP43OLNAVJ)](https://codecov.io/gh/to4kin/dev-school-app)
 
 # dev-school-app
 
