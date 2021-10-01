@@ -56,6 +56,7 @@ jib {
 		ports = ['8080']
 		workingDirectory = '/app'
         mainClass = 'ru.tsystems.devschool.DevSchoolApplication'
+        creationTime = 'USE_CURRENT_TIMESTAMP'
 	}
 	allowInsecureRegistries = false
 }
