@@ -7,11 +7,10 @@
 ## Installation
 ### Precondition
 List of required tools:
-<ul>
-    <li>PostgreSQL 13</li>
-    <li>Gradle v6.6.1 or gradlew</li>
-    <li>Java 8</li>
-</ul>
+
+* PostgreSQL 13
+* Gradle v6.6.1 or gradlew
+* Java 8
 
 ### Build
 
@@ -19,6 +18,30 @@ Use gradle inside root folder for app build.
 
 ```bash
 gradlew build
+```
+
+### Publish
+
+JIB plugin was added to the project, so you can push docker image to the docker regisrty:
+
+```bash
+gradlew build jib
+```
+
+For this command the following properties are required:
+
+gradle.properties:
+```bash
+dockerRegistry = <docker-registry-url>
+dockerUsername = <docker-username>
+dockerPassword = <docker-password>
+```
+
+or via environment variables:
+```bash
+ORG_GRADLE_PROJECT_dockerRegistry=<docker-registry-url>
+ORG_GRADLE_PROJECT_dockerUsername=<docker-username> 
+ORG_GRADLE_PROJECT_dockerPassword=<docker-password> 
 ```
 
 ## Deploy
@@ -34,9 +57,16 @@ spring:
     password: <database password>
 ```
 
+You can also override the default configuration via environment variables:
+```bash
+DATASOURCE_URL=<connection url>
+DATASOURCE_USERNAME=<database user name>
+DATASOURCE_PASSWORD=<database password>
+```
+
 By default deployable JAR file can be found in
 ```bash
-\dev-school-app\build\libs
+build/libs
 ```
 
 Simple deploy can be done by java jar command.

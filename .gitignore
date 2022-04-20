@@ -1,6 +1,7 @@
 target/
 .gradle
 build
+bin
 
 ### Compiled source ###
 *.com
