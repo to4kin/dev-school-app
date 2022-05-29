@@ -38,22 +38,22 @@ bootRun{
 }
 
 jib {
-	from {
-		image = 'azul/zulu-openjdk-alpine:8'
-	}
+    from {
+        image = 'azul/zulu-openjdk-alpine:8'
+    }
 
-	to {
-		image = dockerRegistry + '/dev-school-app'
-		tags = ['latest', version.toString().replaceFirst('^v', '')]
-		auth {
-			username = dockerUsername
-			password = dockerPassword
-		}
-	}
+    to {
+        image = dockerRegistry + '/dev-school-app'
+        tags = ['latest', version.toString().replaceFirst('^v', '')]
+        auth {
+            username = dockerUsername
+            password = dockerPassword
+        }
+    }
 
 	container {
 		appRoot = '/app'
-		ports = ['8080']
+		ports = ['8088']
 		workingDirectory = '/app'
         mainClass = 'ru.tsystems.devschool.DevSchoolApplication'
         creationTime = 'USE_CURRENT_TIMESTAMP'

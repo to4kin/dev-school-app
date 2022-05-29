@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8088
 
 service:
   api:
@@ -24,4 +24,4 @@ spring:
     show-sql: false
 
 base:
-  path: ${BASE_PATH:http://localhost:8080}
+  path: ${BASE_PATH:http://localhost:8088}
